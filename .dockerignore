@@ -1,0 +1,15 @@
+.git
+.vs
+.claude
+.ai-context
+**/.env
+**/.env.local
+**/.env.*.local
+**/node_modules
+**/vendor
+**/.next
+**/storage/logs/*.log
+**/.phpunit.result.cache
+**/coverage
+**/dist
+**/build
