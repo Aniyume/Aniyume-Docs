@@ -2,7 +2,9 @@
 
 **Дата:** 2026-05-26
 **Автор:** Tamerlan Zanshugurov (zanshugurov07@gmail.com)
-**Статус:** Approved, в исполнении (Фаза 0 завершена)
+**Статус:** ✅ Завершено 2026-05-26 — все 4 фазы выполнены. См. раздел 8 "Completion Log".
+
+> **Naming convention deviation:** в spec изначально планировались kebab-case lowercase имена репозиториев (`aniyume-web` и т.д.). В реальной реализации остановились на **PascalCase**: `Aniyume-Web`, `Aniyume-API`, `Aniyume-Admin-Web`, `Aniyume-Docs`. Локальные папки оставлены lowercase (`D:/Aniyume/aniyume-web/`). При деплое в Docker registry имена будут авто-приведены к lowercase.
 
 ## 1. Контекст
 
@@ -33,10 +35,10 @@
 
 | Репо | Содержимое | Стек | Источник |
 |---|---|---|---|
-| `aniyume-web` | Пользовательский frontend | Next.js 16, React 19, TypeScript, Tailwind 4 | Transfer от `KellyHarvestOS/aniyume`, переименование |
-| `aniyume-api` | Backend / API / queue / realtime / admin API | Laravel 12, PHP 8.2+, Sanctum, Reverb | Transfer от `TamerlanWebd/AniYume`, переименование |
-| `aniyume-admin-web` | Админ-панель | Next.js | Init с нуля из `D:/Aniyume/aniyume-admin` |
-| `aniyume-docs` | Дипломная и архитектурная документация, infra | Markdown + Docker compose | Init с нуля из `D:/Aniyume/docs`, `infra/`, `docker-compose.yml` |
+| `Aniyume-Web` | Пользовательский frontend | Next.js 16, React 19, TypeScript, Tailwind 4 | Transfer от `KellyHarvestOS/aniyume`, переименование |
+| `Aniyume-API` | Backend / API / queue / realtime / admin API | Laravel 12, PHP 8.2+, Sanctum, Reverb | Transfer от `TamerlanWebd/AniYume`, переименование |
+| `Aniyume-Admin-Web` | Админ-панель | Next.js | Init с нуля из `D:/Aniyume/aniyume-admin` |
+| `Aniyume-Docs` | Дипломная и архитектурная документация, infra | Markdown + Docker compose | Init с нуля из `D:/Aniyume/docs`, `infra/`, `docker-compose.yml` |
 
 **Почему 4 репозитория, а не один монорепо:** разный lifecycle, разный стек, разные деплои, разные разработчики. Поддерживать монорепо для трёх стеков (PHP, два Next.js) без специнструментов (Nx, Turborepo) дороже, чем держать раздельно.
 
@@ -198,10 +200,59 @@ aniyume-api/.env               CORS_ALLOWED_ORIGINS=https://aniyume.<domain>,htt
 
 После завершения Фазы 4:
 
-- [ ] `https://github.com/Aniyume` существует, в нём 4 репозитория
-- [ ] В каждом репозитории default branch = `dev`, существует `release`
-- [ ] Локальные папки переименованы по новой схеме
-- [ ] `git fetch` и `git push` работают для всех 4 репо
-- [ ] Знакомый добавлен как Member в Organization
-- [ ] Локальный backup zip сохранён (на случай, если что-то пойдёт не так)
-- [ ] Spec-документ существует и закоммичен в `aniyume-docs`
+- [x] `https://github.com/Aniyume` существует, в нём 4 репозитория
+- [x] В каждом репозитории default branch = `dev`, существует `release`
+- [x] Локальные папки переименованы по новой схеме
+- [x] `git fetch` и `git push` работают для всех 4 репо
+- [x] Знакомый добавлен как Member в Organization
+- [x] Локальный backup zip сохранён (на случай, если что-то пойдёт не так)
+- [x] Spec-документ существует и закоммичен в `Aniyume-Docs`
+
+## 8. Completion Log
+
+Все 4 фазы выполнены 2026-05-26 одной сессией.
+
+### Фаза 0 — Безопасность ✅
+- 3 коммита в `aniyume-backend` (всего 212 файлов, +17070 / -1399):
+  - `6a8c3e4` feat: DDD architecture, Docker, CI/CD, code quality tooling
+  - `80a5e34` feat: new modules — AI chat, WatchParty, Anilibria, Friendship, Admin API
+  - `b845f81` refactor: API V1 cleanup, security hardening, legacy code removal
+- Push в `TamerlanWebd/AniYume` → `main`
+- Backup: `D:/Aniyume-backup-2026-05-26.zip` (121 MiB)
+
+### Фаза 1 — GitHub Organization ✅
+- Создана org `Aniyume` (Free plan)
+- Display name: AniYume
+- KellyHarvestOS приглашён как Member
+
+### Фаза 2 — Transfer репозиториев ✅
+- `TamerlanWebd/AniYume` → `Aniyume/Aniyume-API` (Private, 163 коммита)
+- `KellyHarvestOS/aniyume` → `Aniyume/Aniyume-Web` (200+ коммитов, потом переведён в Private)
+- Доп. шаг: завершён прерванный merge в `D:/Aniyume/aniyume` (коммит `f7dee67`)
+- Локальные remotes обновлены
+
+### Фаза 3 — Создание новых репо ✅
+- `Aniyume/Aniyume-Admin-Web` (Private, initial commit `7cffe98`, 20 файлов)
+- `Aniyume/Aniyume-Docs` (Private, initial commit `6254af1`, 57 файлов)
+- Перемещены в `aniyume-docs/`: `docs/`, `infra/`, `docker-compose.yml`, `.dockerignore`, `.env.docker.example`, `anime_episodes.md`, Методические указания (md + pdf)
+
+### Фаза 4 — Ветки и переименование ✅
+- В каждом из 4 репо созданы `dev` и `release` от current main
+- Aniyume-Web release force-обновлён со старого `08447b1` до `f7dee67` (включает обе истории + merge)
+- Default branch на GitHub = `dev` во всех 4 репо
+- Локальные папки переименованы:
+  - `aniyume` → `aniyume-web`
+  - `aniyume-backend` → `aniyume-api`
+  - `aniyume-admin` → `aniyume-admin-web`
+- Все 4 локальных репо на ветке `dev`, remotes валидны
+
+## 9. Outstanding TODOs (вне scope этой миграции)
+
+1. **docker-compose paths.** Файл `aniyume-docs/docker-compose.yml` содержит относительные пути на код типа `./aniyume-backend` — они теперь невалидны (compose уехал в `aniyume-docs/`, папки переименованы). Нужно либо:
+   - Переписать на абсолютные пути / симлинки
+   - Либо вернуть compose в корень `D:/Aniyume/`
+   - Либо использовать env-переменные `${WEB_PATH}`, `${API_PATH}`, `${ADMIN_PATH}` через `.env`
+2. **CI/CD pipeline** (GitHub Actions для билдов на dev/release) — следующий sprint.
+3. **Branch protection rules** для `release` (запрет force-push, требование PR review) — следующий sprint.
+4. **Subdomain DNS** (`aniyume.<domain>`, `api.aniyume.<domain>`, `admin.aniyume.<domain>`) — после регистрации домена.
+5. **Удаление `main` ветки** в каждом из 4 репо — после периода стабилизации (1-2 недели работы на dev/release).
