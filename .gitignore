@@ -8,10 +8,26 @@ Thumbs.db
 *.swp
 *.swo
 
-# Local env (allow .example files)
-.env
-.env.local
-.env.*.local
+# Local env — ignore all real env, allow examples
+.env*
+!.env.example
+!.env.docker.example
+*.env.backup*
+*.backup.env*
+
+# Local secrets and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+auth.json
+credentials.json
+
+# Stray error/debug dumps
+config_err.txt
+*_err.txt
 
 # Docker volumes
 data/
