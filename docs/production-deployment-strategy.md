@@ -201,13 +201,13 @@ https://admin.aniyume.example.com  -> Admin Web
 wss://ws.aniyume.example.com       -> Reverb
 ```
 
-If a shorter brand domain is available, apex can be used for Web:
+The project uses the apex domain `aniyume.tech` for Web:
 
 ```text
-https://aniyume.com
-https://api.aniyume.com
-https://admin.aniyume.com
-wss://ws.aniyume.com
+https://aniyume.tech
+https://api.aniyume.tech
+https://admin.aniyume.tech
+wss://ws.aniyume.tech
 ```
 
 ### Why separate domains are preferred
