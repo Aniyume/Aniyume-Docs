@@ -173,8 +173,8 @@ Demo caveats:
 Current documented backend automated test baseline:
 
 ```text
-70 tests
-272 assertions
+176 tests
+731 assertions
 ```
 
 Covered areas include:
@@ -327,6 +327,8 @@ If Docker startup is incomplete:
 - Reverb realtime should be manually verified in the exact demo environment.
 - External video/API providers can fail or rate-limit.
 - Frontend automated E2E tests are still future work.
+- PHPStan currently reports 34 type-analysis findings in Watch Party relations/resources; functional backend tests still pass.
+- The standalone admin app production build passes, but its legacy `next lint` script is incompatible with the current Next.js CLI.
 - AI safety/provider behavior tests are still future work.
 - Admin access/import/moderation automated tests are still future work.
 
